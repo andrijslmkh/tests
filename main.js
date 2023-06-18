@@ -1,5 +1,5 @@
 const arrQuestion = [
-	// answer [0] - id, [1] - answer, [2] - true/false
+	// answer: [0] - id, [1] - answer, [2] - true/false
 	{
 		id: 1,
 		question: "Cкільки буде 1+1?",
