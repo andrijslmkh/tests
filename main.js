@@ -2,7 +2,7 @@ const arrQuestion = [
 	// answer: [0] - id, [1] - answer, [2] - true/false
 	{
 		id: 1,
-		question: "Cкільки буде 1+1?",
+		question: "Cкільки буде 1 + 1 = ?",
 		answer: [
 			['a', 1, 0],
 			['b', 2, 1],
@@ -35,8 +35,8 @@ const arrQuestion = [
 
 let fieldset = document.querySelector('.fieldset');
 let legend = document.querySelector(".legend");
-let out = document.querySelector(".out");
 let button = document.querySelector('.button');
+let out = document.querySelector(".out");
 let outStr = '';
 let indexQuestion = 0;
 
@@ -47,9 +47,6 @@ function counterQuestion() {
 		if (i === indexQuestion) {
 			legend.id = `${arr[i].id}`;
 			legend.innerHTML = `${arr[i].question}`;
-			fieldset.id = `${arr[i].id}`;
-
-
 			// console.log(arr[i].id);
 			// console.log(arr[i].question);
 
@@ -58,7 +55,7 @@ function counterQuestion() {
 				let label = document.createElement('label');
 				let div = document.createElement('div');
 				input.type = "radio";
-				input.setAttribute("class", `inpt`);
+				input.setAttribute("class", `input`);
 				input.name = `${arr[i].id}`;
 				input.id = `${arr[i].answer[k][0]}`;
 				input.value = `${arr[i].answer[k][1]}`;
@@ -74,22 +71,31 @@ function counterQuestion() {
 			out.innerHTML = outStr;
 		}
 	}
+	button.disabled = true;
+	let r = document.querySelectorAll('input');
+	for (let t = 0; t < r.length; t++) {
+		r[t].onclick = () => {
+			button.disabled = false;
+		}
+	}
 }
+
 
 button.onclick = f9;
 
 function f9() {
 	let legend = document.querySelector('.legend');
-	let inputs = document.querySelectorAll('.inpt');
+	let inputs = document.querySelectorAll('.input');
 	let fieldsetDivs = document.querySelectorAll('.fieldset div');
 	for (let i = 0; i < inputs.length; i++) {
 		if (inputs[i].checked) {
-			outStr += `${legend.id} ${correctness(legend.id, inputs[i].id)}<br>`;
+			outStr += `${legend.id} : ${correctness(legend.id, inputs[i].id)}<br>`;
 		}
 	}
 	for (let k = 0; k < fieldsetDivs.length; k++) {
 		fieldsetDivs[k].remove();
 	}
+
 	indexQuestion++;
 	return counterQuestion();
 }
@@ -115,5 +121,9 @@ function correctness(questionID, answerID) {
 
 
 counterQuestion();
+
+
+
+
 
 
